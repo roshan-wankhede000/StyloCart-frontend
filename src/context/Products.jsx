@@ -6,7 +6,7 @@ export const productContext = createContext();
 
 function Products({ children }) {
   const [productsItems, setProductsItems] = useState(null);
-  let back_URL = 'http://localhost:3000'
+  let back_URL = 'https://stylocart-backend-z02r.onrender.com/'
 
   useEffect(() => {
     const fetchProducts = async () => {
