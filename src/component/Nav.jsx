@@ -38,7 +38,7 @@ function Nav() {
 
   useEffect(() => {
     const email = getCookie("email");
-    setIsLoggedIn(!!email);9 
+    setIsLoggedIn(!!email);
   });
 
   return (
