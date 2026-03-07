@@ -17,11 +17,8 @@ function getCookie(name) {
 }
 
 function Nav() {
-  // const [cart, setCart] = useState(0)
-
   const { back_URL, cart } = useContext(productContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
 
   const handleLogout = () => {    
     axios.get(`${back_URL}/logout`, { withCredentials: true })
