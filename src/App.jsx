@@ -2,8 +2,9 @@ import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "bootstrap-icons/font/bootstrap-icons.css";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Register from './component/Register'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './component/Home';
@@ -85,11 +86,15 @@ function App() {
   
   ])
   return (
-    <>
-  <RouterProvider router={router}>
-
-  </RouterProvider>
-         </>
+  <>
+ <RouterProvider router={router} />
+  <ToastContainer
+  position="top-right"
+  autoClose={3000}
+  theme="colored"
+  newestOnTop={true}
+/>
+  </>
   )
 }
 

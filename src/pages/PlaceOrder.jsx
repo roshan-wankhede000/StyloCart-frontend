@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { productContext } from '../context/Products';
+import { toast } from 'react-toastify';
 
 function PlaceOrder() {
   let {back_URL} = useContext(productContext)
@@ -53,12 +54,12 @@ function PlaceOrder() {
         withCredentials: true // 🧠 Required to send cookies
       });
 
-      alert("Order placed successfully!");
+      toast.success("Order placed successfully!");
       navigate("/order")
     
     } catch (err) {
       console.error("Order placement error:", err);
-      alert(err.response?.data?.error || "Something went wrong");
+      toast.error(err.response?.data?.error || "Something went wrong");
     }
   };
 

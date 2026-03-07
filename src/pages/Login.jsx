@@ -1,26 +1,45 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { productContext } from '../context/Products'
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useContext } from 'react';
+import { productContext } from '../context/Products';
 
 function Login() {
   let {back_URL} = useContext(productContext)
-    let navigate = useNavigate()
-    let [email,setEmail] = useState()
-    let [password,setPassword] = useState()
-    function logInUser(e) {
-        e.preventDefault();
-        axios.post(`${back_URL}/login`,{ email,password },{
-            withCredentials: true // <-- This allows cookies to be sent/stored
-        }).then((res)=>{console.log("Success, dictionary sent,");
-            navigate("/");
-            window.location.reload()
-        }).catch((err) => {
-      });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  function logInUser(e) {
+    e.preventDefault();
+
+    if (!email || !password) {
+      toast.warning("Please Enter Both Email And Password.");
+      return;
     }
+
+    axios.post(`${back_URL}/login`, { email, password }, { withCredentials: true })
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("Login successful!");
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+          localStorage.setItem("email",res.data.email)
+        }
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 401) {
+          toast.error("Username or Password Not valid");
+        } else {
+          toast.error("Something went wrong. Please try again later.");
+        }
+      });
+  }
+
   return (
-    <>
     <div className="login">
        <div className="form-container">
     <h2>Login</h2>
@@ -41,8 +60,7 @@ function Login() {
     </form>
   </div>
   </div>
-    </>
-  )
+  );
 }
 
-export default Login
+export default Login;

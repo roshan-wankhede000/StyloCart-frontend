@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { productContext } from '../context/Products';
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 function Register() {
     let {back_URL}= useContext(productContext)
@@ -16,8 +17,15 @@ function Register() {
 
   const onSubmit = (data) => {
     axios.post(`${back_URL}/addUser`, data)
-      .then(() => navigate("/login"))
-      .catch((err) => console.log(err.response));
+      .then((res) => {
+        if (res.status === 201) {
+        toast.success("Registration Successful!!");
+        navigate("/login");
+      }
+      })
+      .catch((err) => {
+            toast.error(err.response?.data?.message || "Error occurred");
+      });
   };
 
   const handleGoogleLogin = () => {

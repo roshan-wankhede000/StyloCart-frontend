@@ -6,6 +6,8 @@ import cartIcon from "../assets/frontend_assets/cart_icon.png";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { productContext } from '../context/Products';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -15,15 +17,22 @@ function getCookie(name) {
 }
 
 function Nav() {
+  // const [cart, setCart] = useState(0)
 
-  const { back_URL } = useContext(productContext);
+  const { back_URL, cart } = useContext(productContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = () => {    
     axios.get(`${back_URL}/logout`, { withCredentials: true })
       .then(() => {
-        window.location.reload();
+        toast.success("Logout Successfully.")
+        localStorage.removeItem('email')
+      })
+      .then(() => {
+        setTimeout(() => {
+            window.location.reload();
+          }, 1000);
       })
       .catch((err) => {
         console.error("Logout failed:", err);
@@ -32,8 +41,8 @@ function Nav() {
 
   useEffect(() => {
     const email = getCookie("email");
-    setIsLoggedIn(!!email);
-  }, []);
+    setIsLoggedIn(!!email);9 
+  });
 
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm">
@@ -131,9 +140,12 @@ function Nav() {
             </div>
 
             {/* Cart */}
+            <div className='position-relative'>
             <NavLink to="/cart">
               <img src={cartIcon} className="nav-icon" alt="cart" />
+              <p className="cart-icon-count">{cart}</p>
             </NavLink>
+            </div>
 
           </div>
 

@@ -8,15 +8,12 @@ import { productContext } from '../context/Products';
 
 function Cart() {
 
-   let {back_URL} = useContext(productContext)
+   let {back_URL, getCart} = useContext(productContext)
 
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
 
-  // Cart Load
-  useEffect(() => {
-    fetchCart();
-  }, []);
+
 
   const fetchCart = async () => {
     try {
@@ -42,6 +39,12 @@ function Cart() {
       console.error("Error removing item:", err);
     }
   };
+
+    // Cart Load
+  useEffect(() => {
+    fetchCart();
+    getCart();
+  }, [subtotal]);
 
 
   return (

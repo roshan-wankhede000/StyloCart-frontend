@@ -24,6 +24,10 @@ import { productContext } from "../context/Products";
           .then((res) => {
           console.log("Success, dictionary sent,");
           navigate("/");
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 100);
         })
         .catch((err) => {
           console.log(err.response);

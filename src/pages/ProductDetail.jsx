@@ -6,15 +6,24 @@ import star_icon from '../assets/frontend_assets/star_icon.png'
 import star_dull_icon from '../assets/frontend_assets/star_dull_icon.png'
 import { Link, useParams } from 'react-router-dom'
 import { productContext } from '../context/Products'
+import { toast } from 'react-toastify';
 
 function ProductDetail() {
   let { id } = useParams()
-  let { productsItems, back_URL } = useContext(productContext)
+  let email = localStorage.getItem('email')
+  let { productsItems, back_URL, getCart } = useContext(productContext)
   let [ProductDetails, setProductDetails] = useState(null)
   let [relatedProduct, setRelatedProduct] = useState([])
   let [arrSize, setArrSize] = useState([])
   let [size,setSize] = useState()
   let [image,setImage] = useState()
+
+    useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}, [id]);
 
   useEffect(() => {
     if (productsItems) {
@@ -40,8 +49,11 @@ useEffect(()=>{
 
   const fetchProducts = async () => {
   if (!size) {
-    alert("Please select a size before adding to cart.");
+    toast.warning("Please select a size before adding to cart.");
     return;
+  }
+  if(!email){
+    toast.warning("Please login first to continue.");
   }
   try {
     const data = {
@@ -51,15 +63,12 @@ useEffect(()=>{
     const response = await axios.post(`${back_URL}/addToCart/${ProductDetails._id}`, data, {
       withCredentials: true 
     });
-    alert("Product added to cart!");
+    toast.success("Product added to cart!");
+    getCart();
   } catch (err) {
     console.error("Error adding product to cart:", err);
   }
 };
-
-
-    
- 
 
   if (!ProductDetails) {
     return <div className="text-center py-5">Loading product details...</div>
@@ -140,7 +149,7 @@ useEffect(()=>{
       </div>
         <div className="d-flex justify-content-center align-items-center gap-3 flex-wrap">
         {relatedProduct.map((product, i) => (
-          <Link to={`/productDetail/${product._id}`} key={i} className="product-card text-decoration-none text-secondary">
+          <Link to={`/productDetail/${product._id}`}  key={i} className="product-card text-decoration-none text-secondary">
               <img src={`${back_URL}/uploads/${product.image1}`} className="img-fluid" alt="" />
               <p className="m-0">{product.name}</p>
               <p className="fw-bold" style={{ color: "#374151" }}>
