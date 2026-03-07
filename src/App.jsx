@@ -5,7 +5,6 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import "./App.css";
-import Register from './component/Register'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './component/Home';
 import Admin from './component/Admin';
@@ -34,10 +33,6 @@ function App() {
     {
       path:"/collection",
       element:<><Nav></Nav><Collection></Collection><Footer></Footer></>
-    },
-    {
-      path:"/register",
-      element:<><Register></Register></>
     },
     {
       path:"/login",
