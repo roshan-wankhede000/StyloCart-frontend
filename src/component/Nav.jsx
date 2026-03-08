@@ -36,11 +36,19 @@ function Nav() {
       });
   };
 
-  useEffect(() => {
-    const email = getCookie("email");
-    setIsLoggedIn(!!email);
-  });
+  // useEffect(() => {
+  //   const email = getCookie("email");
+  //   setIsLoggedIn(!!email);
+  // });
 
+useEffect(() => {
+  const email = localStorage.getItem("email");
+  if (email) {
+    setIsLoggedIn(true);
+  } else {
+    setIsLoggedIn(false);
+  }
+}, []);
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm">
       <div className="container">
