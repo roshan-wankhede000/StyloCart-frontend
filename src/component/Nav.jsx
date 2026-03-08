@@ -48,7 +48,7 @@ useEffect(() => {
   } else {
     setIsLoggedIn(false);
   }
-}, []);
+});
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm">
       <div className="container">
