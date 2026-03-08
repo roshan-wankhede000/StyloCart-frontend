@@ -10,11 +10,11 @@ import { productContext } from "../context/Products";
       const navigate = useNavigate();
       useEffect(() => {
     const token = localStorage.getItem("email");
-
     if (token !== "admin@gmail.com") {
       navigate("/login");
     }
   }, []);
+  
       const handleSubmit = (e)=>{
         e.preventDefault()
         const data=new FormData(e.target)

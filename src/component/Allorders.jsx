@@ -19,6 +19,13 @@ function Allorders(props) {
     }
     allOrders()
   },[])
+
+    useEffect(() => {
+      const token = localStorage.getItem("email");
+      if (token !== "admin@gmail.com") {
+        navigate("/login");
+      }
+    }, []);
   return (
     <>
        <div className="container-fluid">

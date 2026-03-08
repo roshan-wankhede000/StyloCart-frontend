@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { productContext } from '../context/Products';
 import axios from 'axios';
@@ -16,6 +16,13 @@ function Allitems() {
       console.error("Delete error:", err.response);
     }
   }
+
+  useEffect(() => {
+      const token = localStorage.getItem("email");
+      if (token !== "admin@gmail.com") {
+        navigate("/login");
+      }
+    }, []);
 
   return (
     <>
