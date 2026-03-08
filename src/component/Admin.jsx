@@ -9,7 +9,8 @@ import { productContext } from "../context/Products";
     let {back_URL} = useContext(productContext)
       const navigate = useNavigate();
       useEffect(() => {
-    const token = Cookies.get("email");
+    const token = localStorage.getItem("email");
+
     if (token !== "admin@gmail.com") {
       navigate("/login");
     }
