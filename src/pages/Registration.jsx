@@ -72,7 +72,7 @@ function Register() {
 
           <div className="d-flex justify-content-between mb-3">
             <a href="#" className="small text-decoration-none" style={{color:'#374151',}}>Forgot your password?</a>
-            <Link to="/login" className="small text-decoration-none" style={{color:'#374151',}}>Login Here <i class="bi bi-arrow-right"></i></Link>
+            <Link to="/login" className="small text-decoration-none" style={{color:'#374151',}}>Login Here <i className="bi bi-arrow-right"></i></Link>
           </div>
 
           <button type="submit" className="btn btn-dark w-100 mb-3">
@@ -82,7 +82,7 @@ function Register() {
           <div className="text-center text-muted ">or</div>
 
           <button type="button" className="btn btn-danger w-100" onClick={handleGoogleLogin}>
-            Continue with Google <i class="bi bi-google text-primary bg-white" style={{padding: '4px 6px', borderRadius: '50%'}}></i> <i class="bi bi-arrow-right"></i> 
+            Continue with Google <i className="bi bi-google text-primary bg-white" style={{padding: '4px 6px', borderRadius: '50%'}}></i> <i className="bi bi-arrow-right"></i> 
           </button>
         </form>
       </div>

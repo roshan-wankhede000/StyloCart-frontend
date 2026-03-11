@@ -26,7 +26,7 @@ function Login() {
           toast.success("Login successful!");
           setTimeout(() => {
             navigate("/");
-          }, 1000);
+          }, 500);
           localStorage.setItem("email",res.data.email)
         }
       })
@@ -51,8 +51,8 @@ function Login() {
         <input type="password" className="form-control" onChange={(e)=>setPassword(e.target.value)} name="password" placeholder="Password" />
       </div>
       <div className="form-footer">
-        <a href="#">Forgot your password?</a>
-        <Link to="/registration">Create Account <i class="bi bi-arrow-right"></i></Link>
+        {/* <a href="#">Forgot your password?</a> */}
+        <Link to="/registration">Create Account <i className="bi bi-arrow-right"></i></Link>
       </div>
       <div className="text-center mt-4">
         <button type="submit" className="btn btn-custom px-5">Sign In</button>

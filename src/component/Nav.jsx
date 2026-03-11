@@ -42,13 +42,15 @@ function Nav() {
   // });
 
 useEffect(() => {
-  const email = localStorage.getItem("email");
+  const email = getCookie("email");
+
   if (email) {
     setIsLoggedIn(true);
   } else {
     setIsLoggedIn(false);
   }
 });
+
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm">
       <div className="container">
