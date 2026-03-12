@@ -1,55 +1,43 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import logo from "../assets/frontend_assets/logo.png";
 import searchIcon from "../assets/frontend_assets/search_icon.png";
 import profileIcon from "../assets/frontend_assets/profile_icon.png";
 import cartIcon from "../assets/frontend_assets/cart_icon.png";
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { productContext } from '../context/Products';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-}
-
 function Nav() {
-  const { back_URL, cart } = useContext(productContext);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogout = () => {    
+  const { back_URL, cart } = useContext(productContext);
+
+  // check login from localStorage
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("email")
+  );
+
+  const handleLogout = () => {
     axios.get(`${back_URL}/logout`, { withCredentials: true })
       .then(() => {
-        toast.success("Logout Successfully.")
-        localStorage.removeItem('email')
+        toast.success("Logout Successfully.");
+
+        // remove login state
+        localStorage.removeItem("email");
+
+        // update navbar state
+        setIsLoggedIn(false);
       })
       .then(() => {
         setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+          window.location.reload();
+        }, 1000);
       })
       .catch((err) => {
         console.error("Logout failed:", err);
       });
   };
-
-useEffect(() => {
-  const email = getCookie("email");
-  setIsLoggedIn(!!email);
-}, []);
-
-// useEffect(() => {
-//   const email = getCookie("email");
-
-//   if (email) {
-//     setIsLoggedIn(true);
-//   } else {
-//     setIsLoggedIn(false);
-//   }
-// });
 
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm">
@@ -107,7 +95,7 @@ useEffect(() => {
               <img src={searchIcon} className="nav-icon" alt="search" />
             </Link>
 
-            {/* Profile */}
+            {/* Profile Dropdown */}
             <div className="dropdown">
               <img
                 src={profileIcon}
@@ -148,10 +136,10 @@ useEffect(() => {
 
             {/* Cart */}
             <div className='position-relative'>
-            <NavLink to="/cart">
-              <img src={cartIcon} className="nav-icon" alt="cart" />
-              <p className="cart-icon-count">{cart}</p>
-            </NavLink>
+              <NavLink to="/cart">
+                <img src={cartIcon} className="nav-icon" alt="cart" />
+                <p className="cart-icon-count">{cart}</p>
+              </NavLink>
             </div>
 
           </div>
