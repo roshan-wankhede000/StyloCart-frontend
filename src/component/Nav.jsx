@@ -22,7 +22,7 @@ useEffect(() => {
   } else {
     setIsLoggedIn(false);
   }
-}, []);
+});
 
   const handleLogout = () => {
     axios.get(`${back_URL}/logout`, { withCredentials: true })
