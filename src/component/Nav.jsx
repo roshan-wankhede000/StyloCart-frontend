@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import logo from "../assets/frontend_assets/logo.png";
 import searchIcon from "../assets/frontend_assets/search_icon.png";
 import profileIcon from "../assets/frontend_assets/profile_icon.png";
@@ -8,7 +8,6 @@ import axios from 'axios';
 import { productContext } from '../context/Products';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 function Nav() {
 
   const { back_URL, cart } = useContext(productContext);
