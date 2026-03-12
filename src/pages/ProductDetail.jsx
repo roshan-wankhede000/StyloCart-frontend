@@ -57,9 +57,10 @@ useEffect(()=>{
   }
   try {
     const data = {
-      size: size,
-      quantity: 1
-    };
+  email: email,
+  size: size,
+  quantity: 1
+};
     const response = await axios.post(`${back_URL}/addToCart/${ProductDetails._id}`, data, {
       withCredentials: true 
     });
