@@ -8,8 +8,8 @@ function Products({ children }) {
   const [cart, setCart] = useState(0)
   const [productsItems, setProductsItems] = useState(null)
 
-  let back_URL = 'https://stylocart-backend-z02r.onrender.com'
-  // let back_URL = 'http://localhost:3000'
+  const back_URL = 'https://stylocart-backend-z02r.onrender.com'
+  // const back_URL = 'http://localhost:3000'
 
   const fetchProducts = async () => {
     try {
@@ -21,28 +21,30 @@ function Products({ children }) {
   };
 
   const getCart = async () => {
-    const email = localStorage.getItem("email");
+    try {
+      const email = localStorage.getItem("email");
 
-    if (email) {
-      const res = await axios.get(`${back_URL}/getCart`, { withCredentials: true });
-      setCart(res.data.cartItems.length);
+      if (email) {
+        const res = await axios.get(`${back_URL}/getCart`, { withCredentials: true });
+        setCart(res.data.cartItems.length);
+      }
+    } catch (err) {
+      console.error("Error fetching cart:", err);
     }
   };
 
-useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  const email = params.get("email");
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get("email");
 
-  if (email) {
-    localStorage.setItem("email", email);
+    if (email) {
+      localStorage.setItem("email", email);
+      window.history.replaceState({}, document.title, "/");
+    }
 
-    // remove email from URL
-    window.history.replaceState({}, document.title, "/");
-  }
-
-  fetchProducts();
-  getCart();
-}, []);
+    fetchProducts();
+    getCart();
+  }, []);
 
   return (
     <productContext.Provider value={{ productsItems, back_URL, cart, getCart }}>
