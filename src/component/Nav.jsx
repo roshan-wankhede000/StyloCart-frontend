@@ -36,20 +36,20 @@ function Nav() {
       });
   };
 
-  // useEffect(() => {
-  //   const email = getCookie("email");
-  //   setIsLoggedIn(!!email);
-  // });
-
 useEffect(() => {
   const email = getCookie("email");
+  setIsLoggedIn(!!email);
+}, []);
 
-  if (email) {
-    setIsLoggedIn(true);
-  } else {
-    setIsLoggedIn(false);
-  }
-});
+// useEffect(() => {
+//   const email = getCookie("email");
+
+//   if (email) {
+//     setIsLoggedIn(true);
+//   } else {
+//     setIsLoggedIn(false);
+//   }
+// });
 
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm">
