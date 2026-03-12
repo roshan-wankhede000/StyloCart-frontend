@@ -13,10 +13,17 @@ function Nav() {
 
   const { back_URL, cart } = useContext(productContext);
 
-  // check login from localStorage
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("email")
-  );
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+useEffect(() => {
+  const email = localStorage.getItem("email");
+
+  if (email) {
+    setIsLoggedIn(true);
+  } else {
+    setIsLoggedIn(false);
+  }
+}, []);
 
   const handleLogout = () => {
     axios.get(`${back_URL}/logout`, { withCredentials: true })
