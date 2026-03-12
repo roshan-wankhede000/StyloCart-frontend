@@ -28,9 +28,9 @@ function Register() {
       });
   };
 
-  const handleGoogleLogin = () => {
-    window.open(`${back_URL}/auth/google`, "_self");
-  };
+  // const handleGoogleLogin = () => {
+  //   window.open(`${back_URL}/auth/google`, "_self");
+  // };
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
@@ -79,11 +79,11 @@ function Register() {
             Sign Up
           </button>
 
-          <div className="text-center text-muted ">or</div>
+          {/* <div className="text-center text-muted ">or</div>
 
           <button type="button" className="btn btn-danger w-100" onClick={handleGoogleLogin}>
             Continue with Google <i className="bi bi-google text-primary bg-white" style={{padding: '4px 6px', borderRadius: '50%'}}></i> <i className="bi bi-arrow-right"></i> 
-          </button>
+          </button> */}
         </form>
       </div>
     </div>

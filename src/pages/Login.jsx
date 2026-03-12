@@ -50,12 +50,12 @@ function Login() {
       <div className="mb-3">
         <input type="password" className="form-control" onChange={(e)=>setPassword(e.target.value)} name="password" placeholder="Password" />
       </div>
-      <div className="form-footer">
+      <div className="form-footer d-flex justify-content-end">
         {/* <a href="#">Forgot your password?</a> */}
-        <Link to="/registration">Create Account <i className="bi bi-arrow-right"></i></Link>
+        <Link to="/registration" style={{letterSpacing:'2px', textDecoration:'underline'}}>Create Account <i className="bi bi-arrow-right"></i></Link>
       </div>
       <div className="text-center mt-4">
-        <button type="submit" className="btn btn-custom px-5">Sign In</button>
+        <button type="submit" className="btn btn-outline-dark px-5">Sign In</button>
       </div>
     </form>
   </div>
