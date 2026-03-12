@@ -52,7 +52,7 @@ function Login() {
       </div>
       <div className="form-footer d-flex justify-content-end">
         {/* <a href="#">Forgot your password?</a> */}
-        <Link to="/registration" style={{letterSpacing:'2px', textDecoration:'underline'}}>Create Account <i className="bi bi-arrow-right"></i></Link>
+        <Link to="/registration" style={{color:'#374151',letterSpacing:'2px', textDecoration:'underline'}}>Create Account <i className="bi bi-arrow-right"></i></Link>
       </div>
       <div className="text-center mt-4">
         <button type="submit" className="btn btn-outline-dark px-5">Sign In</button>

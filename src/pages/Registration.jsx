@@ -70,9 +70,8 @@ function Register() {
             {errors.password && <div className="text-danger small">Password is required</div>}
           </div>
 
-          <div className="d-flex justify-content-between mb-3">
-            <a href="#" className="small text-decoration-none" style={{color:'#374151',}}>Forgot your password?</a>
-            <Link to="/login" className="small text-decoration-none" style={{color:'#374151',}}>Login Here <i className="bi bi-arrow-right"></i></Link>
+          <div className="d-flex justify-content-end mb-3">
+            <Link to="/login" style={{color:'#374151',letterSpacing:'2px', textDecoration:'underline'}}>Login Here <i className="bi bi-arrow-right"></i></Link>
           </div>
 
           <button type="submit" className="btn btn-dark w-100 mb-3">
